@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from loggerSingleton import SingletonLogger as LoggerSingleton
+
 import os
-import logging
 import PyPDF2
 import docx
 from json import load
@@ -10,15 +11,8 @@ from odf import teletype
 from datasets import Dataset
 
 # 로깅 설정
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('training.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger(__name__)
+singletonLogger = LoggerSingleton()
+logger = singletonLogger.get_logger()
 
 class DocumentProcessor:
     """문서 처리 클래스"""
